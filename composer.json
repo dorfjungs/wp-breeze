@@ -1,0 +1,34 @@
+{
+    "name": "dorfjungs/wp-breeze",
+    "description": "Extension library for wordpress themes",
+    "type": "library",
+    "require": {
+        "dorfjungs/acf-breeze": "dev-dev"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.4",
+        "brainmaestro/composer-git-hooks": "^2.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Davide Perozzi",
+            "email": "davide@dorfjungs.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "WpBreeze\\": "src"
+        }
+    },
+    "extra": {
+        "hooks": {
+            "pre-commit": "php ./vendor/bin/php-cs-fixer fix --verbose",
+            "post-commit": "php ./vendor/bin/phpunit"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": "php ./vendor/bin/cghooks add --ignore-lock",
+        "post-update-cmd": "php ./vendor/bin/cghooks update"
+    }
+}
