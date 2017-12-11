@@ -2,6 +2,7 @@
     "name": "dorfjungs/wp-breeze",
     "description": "Extension library for wordpress themes",
     "type": "library",
+    "minimum-stability": "dev",
     "require": {
         "dorfjungs/acf-breeze": "dev-dev"
     },
