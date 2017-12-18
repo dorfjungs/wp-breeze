@@ -60,6 +60,10 @@ abstract class AbstractAssetAction extends AbstractAction
      */
     private function parseSource($src)
     {
+        if (strpos($src, 'http://') !== false || strpos($src, 'https://') !== false) {
+            return $src;
+        }
+
         return rtrim($this->baseUrl, '/') . '/' . ltrim($src, '/');
     }
 
