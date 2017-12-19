@@ -42,7 +42,8 @@ class Application
     private $viewHelpers = [
         ViewHelpers\ResourceViewHelper::class,
         ViewHelpers\Base64ViewHelper::class,
-        ViewHelpers\ContentViewHelper::class
+        ViewHelpers\ContentViewHelper::class,
+        ViewHelpers\AjaxUrlViewHelper::class
     ];
 
     /**

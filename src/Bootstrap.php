@@ -115,16 +115,24 @@ class Bootstrap
      */
     private function executeHooks(Actions\AbstractAction $action, callable $callback)
     {
-        $parts = explode($action::HOOK_SEPARATOR, $action->hook);
-        $fnc = '';
+        $hookNames = $action->hook;
 
-        if ($action->hookType == $action::HOOK_ACTION) {
-            $fnc = 'add_action';
-        } elseif ($action->hookType == $action::HOOK_FILTER) {
-            $fnc = 'add_filter';
+        if ( ! is_array($hookNames)) {
+            $hookNames = [$hookNames];
         }
 
-        $this->executeHookCtx($parts, $callback, $fnc);
+        foreach ($hookNames as $name) {
+            $parts = explode($action::HOOK_SEPARATOR, $name);
+            $fnc = '';
+
+            if ($action->hookType == $action::HOOK_ACTION) {
+                $fnc = 'add_action';
+            } elseif ($action->hookType == $action::HOOK_FILTER) {
+                $fnc = 'add_filter';
+            }
+
+            $this->executeHookCtx($parts, $callback, $fnc);
+        }
     }
 
     /**

@@ -25,12 +25,12 @@ abstract class AbstractAction
     public $name = '';
 
     /**
-     * @var string
+     * @var string|array
      */
     public $hook = '';
 
     /**
-     * @var array $params
+     * @var array
      */
     public $hookType = self::HOOK_ACTION;
 
