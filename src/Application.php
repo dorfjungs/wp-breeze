@@ -69,7 +69,9 @@ class Application
      */
     protected static $instances = [];
 
-
+    /**
+     * @param string $id
+     */
     public function __construct($id)
     {
         $this->id = $id;
@@ -278,10 +280,11 @@ class Application
 
     /**
      * @return string
+     * @param string $url
      */
-    public function getBaseUrl()
+    public function getBaseUrl($url = '')
     {
-        return $this->baseUrl;
+        return rtrim($this->baseUrl, '/') . '/' . ltrim($url, '/');;
     }
 
     /**
