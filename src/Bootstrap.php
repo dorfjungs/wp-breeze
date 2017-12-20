@@ -143,12 +143,31 @@ class Bootstrap
      */
     private function executeHookCtx($parts, callable $callback, $fnc)
     {
-        $fnc(array_shift($parts), function () use (&$parts, $callback, $fnc) {
+        $current = array_shift($parts);
+        $priority = 10;
+        $acceptedArgs = 1;
+
+        preg_match('/^(.*)\((.*)\)$/', $current, $matches);
+
+        if (count($matches) === 3) {
+            $current = $matches[1];
+            $hookArgs = explode(',', $matches[2]);
+
+            if (array_key_exists(0, $hookArgs)) {
+                $priority = intval($hookArgs[0]);
+            }
+
+            if (array_key_exists(1, $hookArgs)) {
+                $acceptedArgs = intval($hookArgs[1]);
+            }
+        }
+
+        $fnc($current, function () use (&$parts, $callback, $fnc) {
             if (count($parts) > 0) {
                 return $this->executeHookCtx($parts, $callback, $fnc);
             }
 
             return $callback(func_get_args());
-        });
+        }, $priority, $acceptedArgs);
     }
 }

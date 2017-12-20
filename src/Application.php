@@ -61,7 +61,8 @@ class Application
         Actions\NavMenuAction::class,
         Actions\LoginAssetAction::class,
         Actions\LoginLogoUrlAction::class,
-        Actions\LoginHeaderTitleAction::class
+        Actions\LoginHeaderTitleAction::class,
+        Actions\AcfFieldTitleAction::class
     ];
 
     /**
