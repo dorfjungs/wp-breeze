@@ -53,7 +53,6 @@ class Application
         Actions\SecurityAction::class,
         Actions\DefaultAssetAction::class,
         Actions\AcfBreezeAction::class,
-        Actions\TidyOutputAction::class,
         Actions\BodyClassAction::class,
         Actions\AdminBarAction::class,
         Actions\ThemeSupportAction::class,
