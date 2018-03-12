@@ -12,8 +12,8 @@ class ResourceViewHelper extends AbstractViewHelper
     /**
      * @param string $path
      */
-    public function render($path = '')
+    public function render($path = '', $usePath = false)
     {
-        return rtrim($this->application->getResourceUrl(), '/') . '/' . ltrim($path, '/');
+        return rtrim($this->application->getResourceUrl($usePath), '/') . '/' . ltrim($path, '/');
     }
 }

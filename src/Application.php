@@ -43,7 +43,8 @@ class Application
         ViewHelpers\ResourceViewHelper::class,
         ViewHelpers\Base64ViewHelper::class,
         ViewHelpers\ContentViewHelper::class,
-        ViewHelpers\AjaxUrlViewHelper::class
+        ViewHelpers\AjaxUrlViewHelper::class,
+        ViewHelpers\DebugViewHelper::class
     ];
 
     /**
@@ -288,11 +289,12 @@ class Application
     }
 
     /**
+     * @param boolean $usePath
      * @return void
      */
-    public function getResourceUrl()
+    public function getResourceUrl($usePath = false)
     {
-        return rtrim($this->baseUrl, '/') . '/' . ltrim($this->resourcePath, '/');
+        return rtrim($usePath ? $this->basePath : $this->baseUrl, '/') . '/' . ltrim($this->resourcePath, '/');
     }
 
     /**
