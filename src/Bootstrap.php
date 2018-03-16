@@ -47,7 +47,6 @@ class Bootstrap
         $actionParams = array_replace_recursive($this->actionParams, $params);
 
         foreach ($this->actions as $action) {
-            $action->application = $application;
             $params = array_key_exists($action->name, $actionParams)
                 ? $actionParams[$action->name]
                 : [];
@@ -65,14 +64,14 @@ class Bootstrap
             }
 
             if (empty($action->hook)) {
-                $this->runAction($action, $params);
+                $this->runAction($application, $action, $params);
             } else {
-                $this->executeHooks($action, function ($args) use ($action, $params) {
+                $this->executeHooks($action, function ($args) use ($application, $action, $params) {
                     if ( ! empty($args)) {
                         $params['args'] = $args;
                     }
 
-                    return $this->runAction($action, $params);
+                    return $this->runAction($application, $action, $params);
                 });
             }
         }
@@ -91,8 +90,10 @@ class Bootstrap
      * @param array $params
      * @return mixed
      */
-    private function runAction(&$action, &$params = [])
+    private function runAction(&$application, &$action, &$params = [])
     {
+        $action->application = $application;
+
         foreach ($this->beforeActionCallbacks as $callback) {
             $callback($action, $params);
         }
