@@ -15,12 +15,7 @@ class AjaxUrlViewHelper extends AbstractViewHelper
      */
     public function render($action, $args = [])
     {
-        $argsStr = '';
-
-        foreach ($args as $name => $value) {
-            $argsStr .= $name . '=' . $value;
-        }
-
+        $argsStr = http_build_query($args, '', '&');
         return rtrim(admin_url(), '/') . '/admin-ajax.php?action=' . $action . (!empty($argsStr) ? '&' : '') . $argsStr;
     }
 }
