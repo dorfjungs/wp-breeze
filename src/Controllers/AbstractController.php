@@ -17,6 +17,11 @@ abstract class AbstractController
     protected $timber = null;
 
     /**
+     * @var array
+     */
+    protected $data = [];
+
+    /**
      * @param WpBreeze\Application $application
      */
     public function __construct(Application $application)
@@ -50,5 +55,16 @@ abstract class AbstractController
         });
 
         return $viewHelper;
+    }
+
+    /**
+     *
+     * @param mixed $data
+     * @return $this
+     */
+    public function setData($data) {
+        $this->data = $data;
+
+        return $this;
     }
 }
